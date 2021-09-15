@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+  mysql:
+    container_name: mysql 
+    image: mysql:5.7
+    ports:
+      - 9083:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - newdbdata1:/var/lib/mysql
+    networks:
+      - django2
+
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmins
+    restart: always
+    ports:
+      - 9082:80
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    networks:
+      - django2
+      
+  app:
+    container_name: app 
+    build: 
+      context: .
+    ports: 
+      - 8000:8000
+    volumes: 
+      - ./app:/app
+    depends_on: 
+      - mysql
+    command: >
+     sh -c "python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - django2
+
+networks:
+  django2:
+    driver: bridge
+   
+volumes:
+  newdbdata1:
+
+  
+  
+    
+
+ 
