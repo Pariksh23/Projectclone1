@@ -27,7 +27,7 @@ SECRET_KEY = '@kwffmtc+1=$gys^ys5=7as40^^^$1mt^yj@38qg$t25a*_!cg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['parikshit2.herokuapp.com']
+ALLOWED_HOSTS = ['parik.herokuapp.com']
 
 
 # Application definition
